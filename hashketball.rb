@@ -144,8 +144,16 @@ def player_stats(player_name)
     find { |player| player[:player_name] == player_name }
 end
 
+def player_numbers(team_name)
+  get_team(team_name)[:players].map{|player| player[:number]}
+end
+
+def team_names
+  game_hash.map{|key, value| value[:team_name]}
+end
+
 def team_colors(team_name)
-  get_team(team_name).select
+  get_team(team_name)[:colors]
 end
 
 
@@ -156,5 +164,5 @@ def get_all_players
 end
 
 def get_team(team_name)
-  game_hash.select {|k, v| v[:team_name] == team_name}
+  game_hash.find {|key, value| value[:team_name] == team_name}[1]
 end
