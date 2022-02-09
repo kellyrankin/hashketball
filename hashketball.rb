@@ -130,18 +130,31 @@ end
 
 
 def num_points_scored(player_name)
-  #go into both home and away and search for player_name and then points
-  #map into game_hash
-  #access players for each team
-  #select player by name
-  #select score
-
   get_all_players().
     find { |player| player[:player_name] == player_name }[:points]
 end
+
+def shoe_size(player_name)
+  get_all_players().
+    find { |player| player[:player_name] == player_name }[:shoe]
+end
+
+def player_stats(player_name)
+  get_all_players().
+    find { |player| player[:player_name] == player_name }
+end
+
+def team_colors(team_name)
+  get_team(team_name).select
+end
+
 
 private
 
 def get_all_players
   game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+def get_team(team_name)
+  game_hash.select {|k, v| v[:team_name] == team_name}
 end
